@@ -1,0 +1,77 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/mise
+  # changelog: https://github.com/rynkowsg/mise-orb/blob/main/CHANGELOG.md
+  mise: rynkowsg/mise@0.1.0
+  # orb info: https://circleci.com/developer/orbs/orb/circleci/orb-tools
+  # changelog: https://github.com/CircleCI-Public/orb-tools-orb/releases
+  orb-tools: circleci/orb-tools@12.5.0
+  # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/rynkowsg
+  rynkowsg: rynkowsg/rynkowsg@0.7.0
+  # orb info: https://circleci.com/developer/orbs/orb/circleci/shellcheck
+  # changelog: https://github.com/CircleCI-Public/shellcheck-orb/releases
+  shellcheck: circleci/shellcheck@3.4.0
+  # inline orb
+  inline:
+    executors:
+      docker_base_small:
+        # https://circleci.com/developer/images/image/cimg/base
+        # https://hub.docker.com/r/cimg/base/tags
+        docker: [{image: 'cimg/base:2026.09-22.04'}]
+        resource_class: small
+
+# Every branch and every tag. Tags have to be named: a job with no tag filter is
+# skipped when a tag is pushed, and this is a setup config - if nothing here runs
+# on a tag, nothing continues to test-deploy.yml and a release cannot publish.
+run_always: &run_always
+  branches: {only: '/.*/'}
+  tags: {only: '/.*/'}
+
+jobs:
+  lint_and_format:
+    executor: inline/docker_base_small
+    steps:
+      - checkout
+      - mise/setup:
+          mise_version: v2026.9.2
+          # java is here because babashka needs it, and babashka runs sosh.
+          # uv and python are here because yamllint installs through them.
+          tools: >-
+            babashka java
+            bats
+            shellcheck
+            shfmt
+            yamlfmt
+            yamllint uv python
+      - rynkowsg/install_sosh: {version: "v0.2.0"}
+      - run: make format_yaml/check
+      - run: make format_shell/check
+      - run: make lint_shell/check
+      - run: make lint_yaml/check
+      - run: make test
+
+workflows:
+  lint-pack:
+    jobs:
+      # checks
+      - lint_and_format: {filters: *run_always}
+      - orb-tools/lint: {filters: *run_always, executor: {name: orb-tools/python, resource_class: small}}
+      - orb-tools/review: {filters: *run_always, executor: {name: orb-tools/default, resource_class: small}}
+      - shellcheck/check: {filters: *run_always}
+      # continue
+      - orb-tools/pack: {filters: *run_always, executor: {name: orb-tools/default, resource_class: small}}
+      - orb-tools/continue:
+          requires:
+            - lint_and_format
+            - orb-tools/lint
+            - orb-tools/pack
+            - orb-tools/review
+            - shellcheck/check
+          executor: {name: orb-tools/default, resource_class: small}
+          filters: *run_always
+          orb_name: mise
+          pipeline_number: <<pipeline.number>>
+          vcs_type: <<pipeline.project.type>>

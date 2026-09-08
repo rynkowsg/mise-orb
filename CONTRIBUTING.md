@@ -45,6 +45,25 @@ login`, or `CIRCLE_TOKEN` in the environment.
 `make format` and `make lint` fetch their helpers with `sosh`, so
 [sosh](https://github.com/rynkowsg/sosh) has to be on `PATH`.
 
+## CI
+
+The pipeline runs in two halves, and they use two different versions of this orb.
+
+`.circleci/config.yml` is the setup config: it runs the checks and installs their
+toolchain with a **released** version, `rynkowsg/mise@X.Y.Z`. That is deliberate.
+The checks are about the working tree, so what installs their tools should not
+also come from it - otherwise a broken command would take the checks that would
+have caught it down with it.
+
+`.circleci/test-deploy.yml` is where the working tree is exercised. It declares
+`mise: {}`, which resolves to the orb packed from the current commit, so the
+integration jobs there run the commands as they are now. That is the half that
+tells you whether a change to a command works.
+
+The version in `config.yml` therefore lags one release behind the source, by
+design. Move it forward as part of a release, together with the README and the
+examples.
+
 ## Release Process
 
 1. **Review unreleased changes**
@@ -73,13 +92,14 @@ login`, or `CIRCLE_TOKEN` in the environment.
 
    Also update the `[Unreleased]` comparison link to point to the new version.
 
-3. **Update version in README.md and examples**
+3. **Update the version everywhere it is written down**
 
-   Replace the previous orb version with `X.Y.Z` in `README.md` and all files under
-   `src/examples/`:
+   Replace the previous orb version with `X.Y.Z` in `README.md`, in every file under
+   `src/examples/`, and in `.circleci/config.yml`, which installs the check toolchain
+   with the last released version:
 
    ```sh
-   grep -r "rynkowsg/mise@" README.md src/examples/
+   grep -rn "rynkowsg/mise@" README.md src/examples/ .circleci/config.yml
    ```
 
 4. **Commit**
@@ -119,8 +139,11 @@ Publishes the same artifact under every label worth reaching for it by:
 | `dev:<git describe>` | yes   | reading which release the build sits after |
 
 A dev version can be published again under the same label and expires 90 days
-after it is created. The branch label is the one to point `.circleci/config.yml`
-at — pinning the sha there means moving it on every change to a command.
+after it is created.
+
+This is for trying a change out from another repository before it is released -
+point that repository's config at `rynkowsg/mise@dev:<branch>` and it follows the
+branch.
 
 The branch label is skipped on a detached HEAD, and the `git describe` one in a
 repository with no tags yet. A slash in a branch name becomes a dash.
