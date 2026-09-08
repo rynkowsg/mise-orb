@@ -1,0 +1,18 @@
+# JetBrains IDEs
+/.idea/*
+!/.idea/codeStyles/
+!/.idea/copyright/
+!/.idea/dictionaries/
+!/.idea/fileTemplates/
+!/.idea/repl-commands.xml
+!/.idea/runConfigurations/
+*.iml
+
+# MacOS
+.DS_Store
+
+# CircleCI
+orb.yml
+
+# sosh
+.github_deps

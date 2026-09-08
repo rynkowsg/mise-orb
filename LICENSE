@@ -1,0 +1,15 @@
+Copyright (c) 2026 Grzegorz Rynkowski
+
+Permission is granted to use this software solely for
+executing CircleCI workflows.
+
+All other rights are reserved.
+
+You may not:
+
+- create derivative works,
+- modify and redistribute the software,
+- use the software or source code for training,
+  fine-tuning, evaluating, or developing AI/ML models,
+- use the software to create competing products,
+- redistribute the software except as expressly permitted.
