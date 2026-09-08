@@ -1,0 +1,74 @@
+description: >
+  Installs mise, then the tools it manages, with the installs cached.
+  Puts them on PATH for the rest of the job through BASH_ENV.
+
+  This is install_mise, cache_key_gen, cache_restore, install and cache_save in
+  the order they have to run. Reach for the individual commands when a job needs
+  something in between - a build step before the cache is saved, say.
+
+parameters:
+  cache_key:
+    type: string
+    default: 'mise-v1-{{ arch }}-{{ checksum "/tmp/mise-cache-key.txt" }}'
+    description: >
+      The cache key, used for both the restore and the save. Bump the version in
+      it to start a new cache. The default checksums the file cache_key_gen
+      writes below.
+  config_dir:
+    type: string
+    default: ""
+    description: >
+      Directory holding mise.toml and mise.lock. When empty, the job's
+      working_directory is used. mise reads its config from the current
+      directory and the directories above it, so this is what points both the
+      install and the cache key at the same file.
+  data_dir:
+    type: string
+    default: "~/.local/share/mise"
+    description: >
+      Where mise keeps the tools it installs. The command exports it as
+      MISE_DATA_DIR, so the directory the cache stores is the directory mise
+      installs into.
+  install_mise:
+    type: boolean
+    default: true
+    description: "Download the mise binary first. Turn off on an image that already ships it."
+  locked:
+    type: boolean
+    default: true
+    description: >
+      Require the lockfile to resolve every tool, so the install makes no
+      call to GitHub or the aqua registry. This also picks the file the
+      cache key is built from - mise.lock when true, mise.toml when false.
+  mise_version:
+    type: string
+    default: ""
+    description: "Version of mise to install, e.g. v2026.9.2. Empty installs the latest release."
+  tools:
+    type: string
+    default: ""
+    description: >
+      Tools to install, separated by whitespace, on a single line. Empty
+      installs everything the config lists. CircleCI has no list parameter,
+      so a YAML folded scalar (>-) is the way to write this over several lines.
+
+steps:
+  - when:
+      condition: <<parameters.install_mise>>
+      steps:
+        - install_mise:
+            mise_version: <<parameters.mise_version>>
+  - cache_key_gen:
+      locked: <<parameters.locked>>
+      config_dir: <<parameters.config_dir>>
+      tools: <<parameters.tools>>
+  - cache_restore:
+      cache_key: <<parameters.cache_key>>
+  - install:
+      locked: <<parameters.locked>>
+      config_dir: <<parameters.config_dir>>
+      data_dir: <<parameters.data_dir>>
+      tools: <<parameters.tools>>
+  - cache_save:
+      cache_key: <<parameters.cache_key>>
+      data_dir: <<parameters.data_dir>>

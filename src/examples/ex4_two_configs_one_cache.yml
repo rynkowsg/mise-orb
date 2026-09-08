@@ -1,0 +1,45 @@
+description: >
+  Two mise.toml files, one cache entry.
+
+  Two setup calls would restore and save twice. That also keys the second entry
+  on the second config alone, while both installs write into the same data
+  directory - so the entry holds more than its key describes.
+
+  Calling the commands apart restores once and saves once, around both installs.
+  The key checksums both lockfiles, so it describes exactly what the entry
+  holds. Give the restore and the save the same key. cache_key_gen reads one
+  config, so it has no part here.
+
+  Each tool stays reachable from the directory its config covers: the shims
+  resolve the version from the directory they run in, and mise merges a nested
+  config with the ones above it.
+
+usage:
+  version: 2.1
+  orbs:
+    mise: rynkowsg/mise@0.1.0
+
+  jobs:
+    build:
+      docker: [{image: "cimg/base:current"}]
+      steps:
+        - checkout
+        - mise/install_mise
+        - mise/cache_restore:
+            cache_key: 'mise-v1-{{ arch }}-{{ checksum "mise.lock" }}-{{ checksum "build/mise.lock" }}'
+        # the repository root config
+        - mise/install: {tools: babashka java}
+        # the config in build/
+        - mise/install: {config_dir: build, tools: shellcheck}
+        - mise/cache_save:
+            cache_key: 'mise-v1-{{ arch }}-{{ checksum "mise.lock" }}-{{ checksum "build/mise.lock" }}'
+        - run: make test
+        - run:
+            name: "shellcheck, from the config in build/"
+            working_directory: build
+            command: shellcheck --version
+
+  workflows:
+    main:
+      jobs:
+        - build

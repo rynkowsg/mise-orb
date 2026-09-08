@@ -1,0 +1,14 @@
+[settings]
+lockfile = true
+
+[tool_alias]
+bat = "aqua:sharkdp/bat"
+bats = "aqua:bats-core/bats-core"
+node = "core:node"
+shellcheck = "aqua:koalaman/shellcheck"
+
+[tools]
+bat = "0.25.0"
+bats = "1.14.0"
+node = "26.8.1"
+shellcheck = "0.11.0"

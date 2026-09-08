@@ -1,0 +1,11 @@
+extends: relaxed
+
+# Skip whatever git ignores, so `yamllint .` covers the same files as yamlfmt
+# and leaves the packed orb in dist/ alone.
+ignore-from-file: .gitignore
+
+rules:
+  document-start: {present: false}
+  line-length:
+    max: 200
+    allow-non-breakable-inline-mappings: true

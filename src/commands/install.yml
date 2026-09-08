@@ -1,0 +1,50 @@
+description: >
+  Installs the tools mise manages and puts them on PATH for the rest of the job.
+
+  Nothing here touches the cache. Pair it with cache_restore and cache_save, or
+  use the setup command, which does that for you.
+
+parameters:
+  config_dir:
+    type: string
+    default: ""
+    description: >
+      Directory holding mise.toml and mise.lock. When empty, the job's
+      working_directory is used. mise reads its config from the current
+      directory and the directories above it.
+  data_dir:
+    type: string
+    default: "~/.local/share/mise"
+    description: >
+      Where mise keeps the tools it installs. The command exports it as
+      MISE_DATA_DIR, so a cache storing that directory stores what mise
+      installed.
+  locked:
+    type: boolean
+    default: true
+    description: >
+      Require the lockfile to resolve every tool, so the install makes no
+      call to GitHub or the aqua registry.
+  tools:
+    type: string
+    default: ""
+    description: >
+      Tools to install, separated by whitespace, on a single line. Empty
+      installs everything the config lists. CircleCI has no list parameter,
+      so a YAML folded scalar (>-) is the way to write this over several lines.
+
+steps:
+  - run:
+      name: "mise/install"
+      environment:
+        PARAM_DATA_DIR: "<<parameters.data_dir>>"
+        PARAM_LOCKED: "<<parameters.locked>>"
+        PARAM_TOOLS: "<<parameters.tools>>"
+      # CircleCI treats working_directory: "" as "use the job's working_directory".
+      working_directory: <<parameters.config_dir>>
+      command: <<include(scripts/install_tools.bash)>>
+  - run:
+      name: "mise/install: list installed tools"
+      # CircleCI treats working_directory: "" as "use the job's working_directory".
+      working_directory: <<parameters.config_dir>>
+      command: mise ls --current

@@ -1,0 +1,16 @@
+description: >
+  Installs the mise binary into ~/.local/bin and puts that directory on PATH
+  for the rest of the job.
+
+parameters:
+  mise_version:
+    type: string
+    default: ""
+    description: "Version of mise to install, e.g. v2026.9.2. Empty installs the latest release."
+
+steps:
+  - run:
+      name: "mise/install_mise"
+      environment:
+        PARAM_MISE_VERSION: "<<parameters.mise_version>>"
+      command: <<include(scripts/install_mise.bash)>>

@@ -11,8 +11,13 @@
 # MacOS
 .DS_Store
 
+# Env
+.env*
+!.envrc
+!.envrc.local.example
+
 # CircleCI
-orb.yml
+dist/
 
 # sosh
 .github_deps

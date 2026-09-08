@@ -1,0 +1,46 @@
+description: >
+  Writes the file the cache key is built from.
+
+  The default cache key of cache_restore and cache_save checksums that file, so
+  this command runs before them. Supply your own key to those two if you want
+  the cache keyed on something else - then this command is not needed.
+
+parameters:
+  cache_key_file:
+    type: string
+    default: "/tmp/mise-cache-key.txt"
+    description: >
+      Where to write the key input. The default is the path the default
+      cache_key of cache_restore and cache_save checksums - move it and those
+      two need a cache_key pointing at the same file.
+  config_dir:
+    type: string
+    default: ""
+    description: >
+      Directory holding mise.toml and mise.lock. When empty, the job's
+      working_directory is used.
+  locked:
+    type: boolean
+    default: true
+    description: >
+      Build the key from mise.lock rather than mise.toml. Match this to the
+      `locked` given to the install command - the two describe the same install.
+  tools:
+    type: string
+    default: ""
+    description: >
+      Tools the job installs, separated by whitespace, on a single line. Empty
+      means every tool the config lists. Naming a subset keeps the key to those
+      tools, so a version bump of a tool this job does not install leaves the
+      cache entry alone.
+
+steps:
+  - run:
+      name: "mise/cache_key_gen"
+      environment:
+        PARAM_CACHE_KEY_FILE: "<<parameters.cache_key_file>>"
+        PARAM_LOCKED: "<<parameters.locked>>"
+        PARAM_TOOLS: "<<parameters.tools>>"
+      # CircleCI treats working_directory: "" as "use the job's working_directory".
+      working_directory: <<parameters.config_dir>>
+      command: <<include(scripts/cache_key.bash)>>

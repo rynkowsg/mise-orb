@@ -1,0 +1,29 @@
+description: >
+  Saves the cache of tools mise installed.
+
+parameters:
+  cache_key:
+    type: string
+    default: 'mise-v1-{{ arch }}-{{ checksum "/tmp/mise-cache-key.txt" }}'
+    description: >
+      The cache key. Must be the same key given to cache_restore, which is what
+      reads the entry back. The default checksums the file cache_key_gen writes,
+      so that command runs first; a key of your own replaces the need for it.
+  data_dir:
+    type: string
+    default: "~/.local/share/mise"
+    description: >
+      Where mise keeps the tools it installs. Match this to the `data_dir`
+      given to the install command - this is the directory being stored.
+
+steps:
+  - save_cache:
+      name: "mise/cache_save"
+      key: <<parameters.cache_key>>
+      # These have to be the directories mise installs into. The install command
+      # exports data_dir as MISE_DATA_DIR to make sure they are. shims is here
+      # because that directory is what puts the tools on PATH.
+      paths:
+        - <<parameters.data_dir>>/installs
+        - <<parameters.data_dir>>/plugins
+        - <<parameters.data_dir>>/shims
