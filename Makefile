@@ -1,50 +1,65 @@
+.DEFAULT_GOAL := help
+
+# Lists every target that carries a `## ` description, in the order they appear.
+# Targets without one stay out of the listing, which is how the `_` ones hide.
+.PHONY: help
+help:  ## Print this help
+	@awk 'BEGIN{FS=":.*##"} /^[a-zA-Z0-9_\/-]+:.*##/ {printf "  %-20s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
 .PHONY: orb/validate
-.PHONY: format
-.PHONY: _format_shell/deps
-.PHONY: format_shell/check
-.PHONY: format_shell/fix
-.PHONY: format_yaml/check
-.PHONY: format_yaml/fix
-.PHONY: lint
-.PHONY: _lint_shell/deps
-.PHONY: lint_shell/check
-.PHONY: lint_yaml/check
-.PHONY: test
-.PHONY: check
+orb/validate:  ## Pack the orb and validate it (needs a CircleCI token)
+	mkdir -p dist
+	circleci orb pack ./src > dist/orb.yml
+	circleci orb validate dist/orb.yml
 
-orb/validate:
-	circleci orb pack ./src > /tmp/orb
-	circleci orb validate /tmp/orb
+.PHONY: format/check
+format/check: format-shell/check format-yaml/check  ## Check shell and YAML formatting
 
-format: format_shell/fix format_yaml/fix
+.PHONY: format/fix
+format/fix: format-shell/fix format-yaml/fix  ## Format shell and YAML
 
-_format_shell/deps: @bin/format.bash
+.PHONY: _format-shell/deps
+_format-shell/deps:
 	sosh fetch @bin/format.bash
 
-format_shell/check: _format_shell/deps
-	\@bin/format.bash check
+.PHONY: format-shell/check
+format-shell/check: _format-shell/deps  ## Check shell formatting
+	./@bin/format.bash check
 
-format_shell/fix: _format_shell/deps
-	\@bin/format.bash apply
+.PHONY: format-shell/fix
+format-shell/fix: _format-shell/deps  ## Format shell scripts
+	./@bin/format.bash apply
 
-format_yaml/check:
+.PHONY: format-yaml/check
+format-yaml/check:  ## Check YAML formatting
 	yamlfmt --lint .
 
-format_yaml/fix:
+.PHONY: format-yaml/fix
+format-yaml/fix:  ## Format YAML files
 	yamlfmt .
 
-lint: lint_shell/check lint_yaml/check
+.PHONY: lint/check
+lint/check: lint-shell/check lint-yaml/check  ## Lint shell and YAML
 
-_lint_shell/deps: @bin/lint.bash
+.PHONY: _lint-shell/deps
+_lint-shell/deps:
 	sosh fetch @bin/lint.bash
 
-lint_shell/check: _format_shell/deps _lint_shell/deps
-	\@bin/lint.bash
+# lint.bash runs shellcheck with --external-sources, so shellcheck follows the
+# `# shellcheck source=` directive in @bin/format.bash, which is one of the files
+# it lints. The library that directive points at has to be fetched as well,
+# otherwise shellcheck reports SC1091 and the lint fails.
+.PHONY: lint-shell/check
+lint-shell/check: _format-shell/deps _lint-shell/deps  ## Lint shell scripts
+	./@bin/lint.bash
 
-lint_yaml/check:
+.PHONY: lint-yaml/check
+lint-yaml/check:  ## Lint YAML files
 	yamllint .
 
-test:
+.PHONY: test
+test:  ## Run the bats tests
 	bats test/scripts
 
-check: format_shell/check format_yaml/check lint_shell/check lint_yaml/check test orb/validate
+.PHONY: check
+check: format/check lint/check test orb/validate  ## Run every check and the tests

@@ -29,21 +29,27 @@ mise trust
 mise install
 ```
 
+One thing stays outside that: the shell checks fetch their helpers with
+[sosh](https://github.com/rynkowsg/sosh), so it has to be on `PATH`.
+
 ## Development
 
 ```bash
-make orb/validate     # pack and validate the orb
-make format           # format shell and YAML
-make lint             # lint shell scripts
-make test             # run the bats tests
-make check            # everything above, in check mode
+make            # list the targets
+make check      # run every check and the tests
 ```
 
-`make orb/validate` calls the CircleCI API, so it needs a token — `circleci auth
-login`, or `CIRCLE_TOKEN` in the environment.
+`make check` includes `make orb/validate`, which calls the CircleCI API, so it
+needs a token — `circleci auth login`, or `CIRCLE_TOKEN` in the environment.
 
-`make format` and `make lint` fetch their helpers with `sosh`, so
-[sosh](https://github.com/rynkowsg/sosh) has to be on `PATH`.
+[direnv](https://direnv.net) is the recommended way to set it. The `.envrc` here
+pulls in the one above it, so in the `orbs-rynkowsg` checkout a single
+`.envrc.local` covers every orb. Read the value from a secret store instead of
+writing it into the file:
+
+```bash
+export CIRCLE_TOKEN="$(pass show rynkowski/circleci/token)"
+```
 
 ## CI
 
