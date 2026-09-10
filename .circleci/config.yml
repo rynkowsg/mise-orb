@@ -35,7 +35,7 @@ jobs:
     steps:
       - checkout
       - mise/setup:
-          mise_version: v2026.9.2
+          mise_version: v2026.9.4 # https://github.com/jdx/mise/releases
           # java is here because babashka needs it, and babashka runs sosh.
           # uv and python are here because yamllint installs through them.
           tools: >-
