@@ -28,7 +28,7 @@ bats = "1.14.0"
 
 # releases: https://github.com/CircleCI-Public/circleci-cli/releases
 # Packs and validates the orb - `make orb/validate`.
-circleci-cli = "1.0.49698"
+circleci-cli = "1.0.49838"
 
 # versions: https://github.com/adoptium/temurin21-binaries/releases
 # changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
@@ -53,7 +53,7 @@ shfmt = "3.14.1"
 # releases: https://github.com/astral-sh/uv/releases
 # changelog: https://github.com/astral-sh/uv/blob/main/CHANGELOG.md
 # Installs the tools that come from the `pipx:` backend. yamllint is the only one.
-uv = "0.12.10"
+uv = "0.12.12"
 
 # releases: https://github.com/google/yamlfmt/releases
 # changelog: https://github.com/google/yamlfmt/blob/main/CHANGELOG.md
