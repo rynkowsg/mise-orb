@@ -46,8 +46,8 @@ jobs:
             yamlfmt
             yamllint uv python
       - rynkowsg/install_sosh: {version: "v0.2.0"}
-      - run: make format-yaml/check
       - run: make format-shell/check
+      - run: make format-yaml/check
       - run: make lint-shell/check
       - run: make lint-yaml/check
       - run: make test
