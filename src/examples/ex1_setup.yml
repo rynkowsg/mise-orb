@@ -1,0 +1,24 @@
+description: >
+  Install every tool the repository's mise.toml lists.
+
+  mise/setup downloads mise, installs the tools from the lockfile and puts them
+  on PATH for the rest of the job. The second run of the job restores the
+  installs from the cache instead of downloading them again.
+
+usage:
+  version: 2.1
+  orbs:
+    mise: rynkowsg/mise@0.1.0
+
+  jobs:
+    build:
+      docker: [{image: "cimg/base:current"}]
+      steps:
+        - checkout
+        - mise/setup
+        - run: make test
+
+  workflows:
+    main:
+      jobs:
+        - build

@@ -1,0 +1,34 @@
+description: >
+  Install only the tools a job actually needs.
+
+  A repository's mise.toml usually lists more tools than any single job uses.
+  Naming them in `tools` keeps the job from installing the rest, and it keeps
+  the cache entry to those tools - a version bump of a tool this job does not
+  install leaves its cache alone.
+
+  CircleCI has no list parameter, so the tools go in one string. A short list
+  fits on one line - `tools: shellcheck shfmt`. A YAML folded scalar (>-) is
+  the way to write a longer one over several lines: it joins them back into a
+  single line separated by spaces.
+
+usage:
+  version: 2.1
+  orbs:
+    mise: rynkowsg/mise@0.1.0
+
+  jobs:
+    lint:
+      docker: [{image: "cimg/base:current"}]
+      steps:
+        - checkout
+        - mise/setup:
+            tools: >-
+              shellcheck
+              shfmt
+              yamlfmt
+        - run: make lint
+
+  workflows:
+    main:
+      jobs:
+        - lint

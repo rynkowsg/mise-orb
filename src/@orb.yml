@@ -1,0 +1,11 @@
+version: 2.1
+
+description: >
+  Installs mise and the tools it manages in a CircleCI job.
+  The installs are cached between jobs, and the tools, together with the
+  environment variables they declare, are put on PATH for the rest of the job
+  through BASH_ENV.
+
+display:
+  home_url: "https://github.com/rynkowsg/mise-orb"
+  source_url: "https://github.com/rynkowsg/mise-orb"

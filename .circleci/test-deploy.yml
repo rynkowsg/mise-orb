@@ -1,0 +1,133 @@
+version: 2.1
+
+orbs:
+  # orb under test
+  mise: {}
+  # orb info: https://circleci.com/developer/orbs/orb/circleci/orb-tools
+  # changelog: https://github.com/CircleCI-Public/orb-tools-orb/releases
+  orb-tools: circleci/orb-tools@12.5.0
+
+# Every branch and every tag. Tags have to be named: a job with no tag filter is
+# skipped when a tag is pushed, and the publish jobs below require these, so on a
+# release tag they would have nothing to wait for.
+run_always: &run_always
+  branches: {only: '/.*/'}
+  tags: {only: '/.*/'}
+
+# Only a release tag, never a branch.
+run_on_release: &run_on_release
+  branches: {ignore: '/.*/'}
+  tags: {only: '/^v[0-9]+\.[0-9]+\.[0-9]+$/'}
+
+jobs:
+  # Installs a subset of the tools from this repository's own mise.toml and
+  # checks they are on PATH afterwards.
+  integration_test_setup:
+    docker: [{image: "cimg/base:current"}]
+    steps:
+      - checkout
+      - mise/setup:
+          mise_version: v2026.9.2
+          tools: shellcheck shfmt
+      - run:
+          name: "tools are on PATH"
+          command: |
+            shellcheck --version
+            shfmt --version
+      - run:
+          name: "the versions are the ones mise.lock pins"
+          command: |
+            grep -q "$(shellcheck --version | awk '/^version:/ {print $2}')" mise.lock
+            grep -q "$(shfmt --version | tr -d v)" mise.lock
+
+  # The unlocked path: mise resolves the versions from mise.toml through its
+  # registry instead of the lockfile. mise_version is left out here, so this is
+  # also the job that covers the default - whatever mise release is current.
+  integration_test_unlocked:
+    docker: [{image: "cimg/base:current"}]
+    steps:
+      - checkout
+      - mise/setup:
+          locked: false
+          tools: shellcheck
+      - run: shellcheck --version
+
+  # A second mise/setup in the same job, with mise already installed by the first
+  # and a config in another directory. Both sets of tools have to work, each in
+  # its own directory.
+  integration_test_second_config:
+    docker: [{image: "cimg/base:current"}]
+    steps:
+      - checkout
+      - mise/setup:
+          mise_version: v2026.9.2
+          tools: shellcheck
+      - run:
+          name: "a second config, in test/res"
+          command: mkdir -p /tmp/second && cp test/res/mise.toml /tmp/second/mise.toml
+      - mise/setup:
+          install_mise: false
+          config_dir: /tmp/second
+          locked: false
+          tools: bat
+      - run:
+          name: "the second config's tool works in its own directory"
+          working_directory: /tmp/second
+          command: bat --version
+      - run:
+          name: "the first config's tools still work at the repository root"
+          command: shellcheck --version
+
+  # The five commands called apart, in the order setup calls them.
+  integration_test_separate_commands:
+    docker: [{image: "cimg/base:current"}]
+    steps:
+      - checkout
+      - mise/install_mise: {mise_version: v2026.9.2}
+      - run: mise --version
+      - mise/cache_key_gen: {tools: shfmt}
+      - mise/cache_restore
+      - mise/install: {tools: shfmt}
+      - mise/cache_save
+      - run:
+          name: "the tool mise installed"
+          command: shfmt --version
+
+workflows:
+  test-deploy:
+    jobs:
+      - integration_test_setup:
+          filters: *run_always
+      - integration_test_unlocked:
+          filters: *run_always
+      - integration_test_second_config:
+          filters: *run_always
+      - integration_test_separate_commands:
+          filters: *run_always
+
+      - orb-tools/pack:
+          filters: *run_always
+
+      - orb-tools/publish:
+          name: publish-dev
+          orb_name: rynkowsg/mise
+          vcs_type: <<pipeline.project.type>>
+          pub_type: dev
+          requires:
+            - integration_test_setup
+            - integration_test_unlocked
+            - integration_test_second_config
+            - integration_test_separate_commands
+            - orb-tools/pack
+          context: circleci/orb-publishing-context
+          filters: *run_always
+
+      - orb-tools/publish:
+          name: publish-prod
+          orb_name: rynkowsg/mise
+          vcs_type: <<pipeline.project.type>>
+          pub_type: production
+          requires:
+            - publish-dev
+          context: circleci/orb-publishing-context
+          filters: *run_on_release

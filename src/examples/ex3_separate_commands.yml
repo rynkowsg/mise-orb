@@ -1,0 +1,32 @@
+description: >
+  The commands setup is made of, written out one by one.
+
+  This is what setup does, in the order it does it, so on its own it buys
+  nothing. Start from it when a job needs something setup cannot express - the
+  next example is one of those - and it shows where a step of your own would go.
+
+  cache_key_gen writes the file the default cache key checksums, so it comes
+  before the restore. Give it the same `tools` you give install - the two
+  describe one install.
+
+usage:
+  version: 2.1
+  orbs:
+    mise: rynkowsg/mise@0.1.0
+
+  jobs:
+    build:
+      docker: [{image: "cimg/base:current"}]
+      steps:
+        - checkout
+        - mise/install_mise
+        - mise/cache_key_gen: {tools: babashka java}
+        - mise/cache_restore
+        - mise/install: {tools: babashka java}
+        - mise/cache_save
+        - run: make build
+
+  workflows:
+    main:
+      jobs:
+        - build

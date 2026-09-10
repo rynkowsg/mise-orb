@@ -1,0 +1,19 @@
+description: >
+  Restores the cache of tools mise installed.
+
+parameters:
+  cache_key:
+    type: string
+    default: 'mise-v1-{{ arch }}-{{ checksum "/tmp/mise-cache-key.txt" }}'
+    description: >
+      The cache key. Must be the same key given to cache_save, which is what
+      wrote the entry. The default checksums the file cache_key_gen writes, so
+      that command runs first; a key of your own replaces the need for it.
+      arch is in the default because an install directory holds binaries for
+      the OS and CPU of the machine that built it.
+
+steps:
+  - restore_cache:
+      name: "mise/cache_restore"
+      keys:
+        - <<parameters.cache_key>>
