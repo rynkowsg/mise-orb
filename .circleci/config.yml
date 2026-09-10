@@ -14,14 +14,13 @@ orbs:
   # orb info: https://circleci.com/developer/orbs/orb/circleci/shellcheck
   # changelog: https://github.com/CircleCI-Public/shellcheck-orb/releases
   shellcheck: circleci/shellcheck@3.4.0
-  # inline orb
-  inline:
-    executors:
-      docker_base_small:
-        # https://circleci.com/developer/images/image/cimg/base
-        # https://hub.docker.com/r/cimg/base/tags
-        docker: [{image: 'cimg/base:2026.09-22.04'}]
-        resource_class: small
+
+executors:
+  docker_base_small_x86:
+    # https://circleci.com/developer/images/image/cimg/base
+    # https://hub.docker.com/r/cimg/base/tags
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: small
 
 # Every branch and every tag. Tags have to be named: a job with no tag filter is
 # skipped when a tag is pushed, and this is a setup config - if nothing here runs
@@ -32,7 +31,7 @@ run_always: &run_always
 
 jobs:
   lint_and_format:
-    executor: inline/docker_base_small
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
