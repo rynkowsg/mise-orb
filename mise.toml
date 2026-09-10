@@ -8,6 +8,8 @@ babashka = "github:babashka/babashka"
 bats = "aqua:bats-core/bats-core"
 circleci-cli = "aqua:CircleCI-Public/circleci-cli"
 java = "core:java"
+keep-a-changelog = "npm:keep-a-changelog"
+node = "core:node"
 python = "core:python"
 shellcheck = "aqua:koalaman/shellcheck"
 shfmt = "aqua:mvdan/sh"
@@ -33,6 +35,17 @@ circleci-cli = "1.0.49698"
 # versions: https://github.com/adoptium/temurin21-binaries/releases
 # changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
 java = "temurin-21.0.12+101.0.LTS"
+
+# releases: https://github.com/oscarotero/keep-a-changelog/releases
+# changelog: https://github.com/oscarotero/keep-a-changelog/blob/master/CHANGELOG.md
+# The package is `keep-a-changelog`, the command is `changelog`.
+# It edits CHANGELOG.md in the Keep a Changelog format.
+keep-a-changelog = { version = "3.2.0", depends = ["node"] }
+
+# releases: https://github.com/nodejs/node/releases
+# changelog: https://github.com/nodejs/node/blob/main/CHANGELOG.md
+# Here because the npm backend needs npm to install keep-a-changelog.
+node = "26.8.1"
 
 # downloads: https://www.python.org/downloads/
 # history: https://python3.info/about/versions.html
