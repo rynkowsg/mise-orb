@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.1] - 2026-09-15
 ### Fixed
 - `install` lists the installed tools as a readable table on machine executors.
   The listing had come out one character per column there.
@@ -29,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - bats tests for the cache key input, covering the lockfile slicing, the
   locked and unlocked modes, and the order-independence of the tool list.
 
-[Unreleased]: https://github.com/rynkowsg/mise-orb/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rynkowsg/mise-orb/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/rynkowsg/mise-orb/compare/v0.1.0...v0.1.1)
 [0.1.0]: https://github.com/rynkowsg/mise-orb/compare/802eebf...v0.1.0
