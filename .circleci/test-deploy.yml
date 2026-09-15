@@ -7,6 +7,11 @@ orbs:
   # changelog: https://github.com/CircleCI-Public/orb-tools-orb/releases
   orb-tools: circleci/orb-tools@12.5.0
 
+constants:
+  # changelog: https://github.com/jdx/mise/blob/main/CHANGELOG.md
+  # releases: https://github.com/jdx/mise/releases
+  - &mise_shared_opts {mise_version: v2026.9.9,}
+
 # Every branch and every tag. Tags have to be named: a job with no tag filter is
 # skipped when a tag is pushed, and the publish jobs below require these, so on a
 # release tag they would have nothing to wait for.
@@ -19,15 +24,47 @@ run_on_release: &run_on_release
   branches: {ignore: '/.*/'}
   tags: {only: '/^v[0-9]+\.[0-9]+\.[0-9]+$/'}
 
+executors:
+  # https://circleci.com/developer/images/image/cimg/base
+  # https://hub.docker.com/r/cimg/base/tags
+  docker_base_medium_arm:
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: arm.medium
+  docker_base_small_x86:
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: small
+  # https://circleci.com/developer/machine/image/android
+  machine_android_medium_x86:
+    machine: {image: 'android:2026.05.1'}
+    resource_class: medium
+  # https://circleci.com/developer/machine/image/ubuntu-2604
+  machine_ubuntu2604_medium_arm:
+    machine: {image: 'ubuntu-2604:2026.07.1'}
+    resource_class: arm.medium
+  machine_ubuntu2604_medium_x86:
+    machine: {image: 'ubuntu-2604:2026.07.1'}
+    resource_class: medium
+  # https://circleci.com/developer/machine/image/xcode
+  # https://circleci.com/docs/guides/execution-managed/using-macos/#available-resource-classes
+  macos_medium:
+    macos: {xcode: '27.0.0'}
+    resource_class: m4pro.medium
+
 jobs:
   # Installs a subset of the tools from this repository's own mise.toml and
-  # checks they are on PATH afterwards.
+  # checks they are on PATH afterwards. The workflow runs it on every executor
+  # above.
   integration_test_setup:
-    docker: [{image: "cimg/base:current"}]
+    parameters:
+      executor: {type: executor}
+    executor: <<parameters.executor>>
     steps:
       - checkout
       - mise/setup:
-          mise_version: v2026.9.2
+          <<: *mise_shared_opts
+          # The executor name is in the key, so each executor installs the tools
+          # itself instead of restoring what another executor of the same arch saved.
+          cache_key: 'mise-v1-<<parameters.executor>>-{{ arch }}-{{ checksum "/tmp/mise-cache-key.txt" }}'
           tools: shellcheck shfmt
       - run:
           name: "tools are on PATH"
@@ -44,7 +81,7 @@ jobs:
   # registry instead of the lockfile. mise_version is left out here, so this is
   # also the job that covers the default - whatever mise release is current.
   integration_test_unlocked:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
@@ -56,11 +93,11 @@ jobs:
   # and a config in another directory. Both sets of tools have to work, each in
   # its own directory.
   integration_test_second_config:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
-          mise_version: v2026.9.2
+          <<: *mise_shared_opts
           tools: shellcheck
       - run:
           name: "a second config, in test/res"
@@ -80,10 +117,10 @@ jobs:
 
   # The five commands called apart, in the order setup calls them.
   integration_test_separate_commands:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
-      - mise/install_mise: {mise_version: v2026.9.2}
+      - mise/install_mise: {<<: *mise_shared_opts}
       - run: mise --version
       - mise/cache_key_gen: {tools: shfmt}
       - mise/cache_restore
@@ -97,6 +134,15 @@ workflows:
   test-deploy:
     jobs:
       - integration_test_setup:
+          matrix:
+            parameters:
+              executor:
+                - docker_base_medium_arm
+                - docker_base_small_x86
+                - machine_android_medium_x86
+                - machine_ubuntu2604_medium_arm
+                - machine_ubuntu2604_medium_x86
+                - macos_medium
           filters: *run_always
       - integration_test_unlocked:
           filters: *run_always
