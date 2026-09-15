@@ -27,19 +27,44 @@ run_on_release: &run_on_release
 executors:
   # https://circleci.com/developer/images/image/cimg/base
   # https://hub.docker.com/r/cimg/base/tags
+  docker_base_medium_arm:
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: arm.medium
   docker_base_small_x86:
     docker: [{image: 'cimg/base:2026.09-24.04'}]
     resource_class: small
+  # https://circleci.com/developer/machine/image/android
+  machine_android_medium_x86:
+    machine: {image: 'android:2026.05.1'}
+    resource_class: medium
+  # https://circleci.com/developer/machine/image/ubuntu-2604
+  machine_ubuntu2604_medium_arm:
+    machine: {image: 'ubuntu-2604:2026.07.1'}
+    resource_class: arm.medium
+  machine_ubuntu2604_medium_x86:
+    machine: {image: 'ubuntu-2604:2026.07.1'}
+    resource_class: medium
+  # https://circleci.com/developer/machine/image/xcode
+  # https://circleci.com/docs/guides/execution-managed/using-macos/#available-resource-classes
+  macos_medium:
+    macos: {xcode: '27.0.0'}
+    resource_class: m4pro.medium
 
 jobs:
   # Installs a subset of the tools from this repository's own mise.toml and
-  # checks they are on PATH afterwards.
+  # checks they are on PATH afterwards. The workflow runs it on every executor
+  # above.
   integration_test_setup:
-    executor: docker_base_small_x86
+    parameters:
+      executor: {type: executor}
+    executor: <<parameters.executor>>
     steps:
       - checkout
       - mise/setup:
           <<: *mise_shared_opts
+          # The executor name is in the key, so each executor installs the tools
+          # itself instead of restoring what another executor of the same arch saved.
+          cache_key: 'mise-v1-<<parameters.executor>>-{{ arch }}-{{ checksum "/tmp/mise-cache-key.txt" }}'
           tools: shellcheck shfmt
       - run:
           name: "tools are on PATH"
@@ -109,6 +134,15 @@ workflows:
   test-deploy:
     jobs:
       - integration_test_setup:
+          matrix:
+            parameters:
+              executor:
+                - docker_base_medium_arm
+                - docker_base_small_x86
+                - machine_android_medium_x86
+                - machine_ubuntu2604_medium_arm
+                - machine_ubuntu2604_medium_x86
+                - macos_medium
           filters: *run_always
       - integration_test_unlocked:
           filters: *run_always
