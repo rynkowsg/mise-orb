@@ -45,6 +45,11 @@ steps:
       command: <<include(scripts/install_tools.bash)>>
   - run:
       name: "mise/install: list installed tools"
+      environment:
+        # On machine executors the step runs in a terminal that reports a width
+        # of zero, and mise then prints the table one character per column.
+        # COLUMNS gives the table a width to fit.
+        COLUMNS: "200"
       # CircleCI treats working_directory: "" as "use the job's working_directory".
       working_directory: <<parameters.config_dir>>
       command: mise ls --current
