@@ -29,5 +29,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - bats tests for the cache key input, covering the lockfile slicing, the
   locked and unlocked modes, and the order-independence of the tool list.
 
-[Unreleased]: https://example.com/compare/v0.1.0...HEAD
-[0.1.0]: https://example.com/releases/tag/v0.1.0
+[Unreleased]: https://github.com/rynkowsg/mise-orb/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/rynkowsg/mise-orb/compare/802eebf...v0.1.0
