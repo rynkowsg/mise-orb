@@ -5,7 +5,7 @@ setup: true
 orbs:
   # orb info: https://circleci.com/developer/orbs/orb/rynkowsg/mise
   # changelog: https://github.com/rynkowsg/mise-orb/blob/main/CHANGELOG.md
-  mise: rynkowsg/mise@0.1.0
+  mise: rynkowsg/mise@0.1.1
   # orb info: https://circleci.com/developer/orbs/orb/circleci/orb-tools
   # changelog: https://github.com/CircleCI-Public/orb-tools-orb/releases
   orb-tools: circleci/orb-tools@12.5.0

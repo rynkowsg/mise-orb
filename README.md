@@ -36,7 +36,7 @@ writes.
 version: '2.1'
 
 orbs:
-  mise: rynkowsg/mise@0.1.0
+  mise: rynkowsg/mise@0.1.1
 
 jobs:
   build:
