@@ -7,6 +7,11 @@ orbs:
   # changelog: https://github.com/CircleCI-Public/orb-tools-orb/releases
   orb-tools: circleci/orb-tools@12.5.0
 
+constants:
+  # changelog: https://github.com/jdx/mise/blob/main/CHANGELOG.md
+  # releases: https://github.com/jdx/mise/releases
+  - &mise_shared_opts {mise_version: v2026.9.9,}
+
 # Every branch and every tag. Tags have to be named: a job with no tag filter is
 # skipped when a tag is pushed, and the publish jobs below require these, so on a
 # release tag they would have nothing to wait for.
@@ -34,7 +39,7 @@ jobs:
     steps:
       - checkout
       - mise/setup:
-          mise_version: v2026.9.2
+          <<: *mise_shared_opts
           tools: shellcheck shfmt
       - run:
           name: "tools are on PATH"
@@ -67,7 +72,7 @@ jobs:
     steps:
       - checkout
       - mise/setup:
-          mise_version: v2026.9.2
+          <<: *mise_shared_opts
           tools: shellcheck
       - run:
           name: "a second config, in test/res"
@@ -90,7 +95,7 @@ jobs:
     executor: docker_base_small_x86
     steps:
       - checkout
-      - mise/install_mise: {mise_version: v2026.9.2}
+      - mise/install_mise: {<<: *mise_shared_opts}
       - run: mise --version
       - mise/cache_key_gen: {tools: shfmt}
       - mise/cache_restore
