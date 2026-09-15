@@ -19,11 +19,18 @@ run_on_release: &run_on_release
   branches: {ignore: '/.*/'}
   tags: {only: '/^v[0-9]+\.[0-9]+\.[0-9]+$/'}
 
+executors:
+  # https://circleci.com/developer/images/image/cimg/base
+  # https://hub.docker.com/r/cimg/base/tags
+  docker_base_small_x86:
+    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    resource_class: small
+
 jobs:
   # Installs a subset of the tools from this repository's own mise.toml and
   # checks they are on PATH afterwards.
   integration_test_setup:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
@@ -44,7 +51,7 @@ jobs:
   # registry instead of the lockfile. mise_version is left out here, so this is
   # also the job that covers the default - whatever mise release is current.
   integration_test_unlocked:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
@@ -56,7 +63,7 @@ jobs:
   # and a config in another directory. Both sets of tools have to work, each in
   # its own directory.
   integration_test_second_config:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/setup:
@@ -80,7 +87,7 @@ jobs:
 
   # The five commands called apart, in the order setup calls them.
   integration_test_separate_commands:
-    docker: [{image: "cimg/base:current"}]
+    executor: docker_base_small_x86
     steps:
       - checkout
       - mise/install_mise: {mise_version: v2026.9.2}
