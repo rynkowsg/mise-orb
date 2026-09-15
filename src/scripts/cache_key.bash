@@ -80,11 +80,10 @@ function main {
   cat "${CACHE_KEY_FILE}"
 }
 
-# shellcheck disable=SC2199
-# to disable warning about concatenation of BASH_SOURCE[@].
-# It is not a problem. This part of condition is only to prevent `unbound variable` error.
-if [[ -n "${BASH_SOURCE[@]}" && "${BASH_SOURCE[0]}" != "${0}" ]]; then
-  [[ -n "${BASH_SOURCE[0]}" ]] && printf "%s\n" "Loaded: ${BASH_SOURCE[0]}"
+# BASH_SOURCE is empty when CircleCI runs the script with `bash -c`. The :- default
+# keeps bash 3.2 on macOS from failing on it under set -u.
+if [[ -n "${BASH_SOURCE[0]:-}" && "${BASH_SOURCE[0]}" != "${0}" ]]; then
+  printf "%s\n" "Loaded: ${BASH_SOURCE[0]}"
 else
   main "$@"
 fi
