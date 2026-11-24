@@ -118,9 +118,9 @@ url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49
 url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004972"
 
 [[tools.java]]
-version = "temurin-21.0.12+101.0.LTS"
+version = "temurin-21.0.12.1+1.0.LTS"
 backend = "core:java"
-specifiers = ["temurin-21.0.12+101.0.LTS"]
+specifiers = ["temurin-21.0.12.1+1.0.LTS"]
 
 [tools.java."platforms.linux-arm64"]
 checksum = "sha256:23e37e026f12f3e706f18938ff611db3032d075b09d0879a25d06718c773e223"

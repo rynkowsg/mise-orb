@@ -33,7 +33,7 @@ circleci-cli = "1.0.49838"
 
 # versions: https://github.com/adoptium/temurin21-binaries/releases
 # changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
-java = "temurin-21.0.12+101.0.LTS"
+java = "temurin-21.0.12.1+1.0.LTS"
 
 # releases: https://github.com/jdx/mise/releases
 # changelog: https://github.com/jdx/mise/blob/main/CHANGELOG.md
