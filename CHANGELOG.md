@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-24
+### Changed
+- Update the shell-gr helpers used by the format and lint scripts from 0.5.0
+  to 0.9.0.
+
 ## [0.1.1] - 2026-09-15
 ### Fixed
 - `install` lists the installed tools as a readable table on machine executors.
