@@ -20,7 +20,7 @@ yamllint = "pipx:yamllint"
 # releases: https://github.com/babashka/babashka/releases
 # changelog: https://github.com/babashka/babashka/blob/master/CHANGELOG.md
 # Runs sosh, which fetches the shell-gr helpers the @bin scripts source.
-babashka = { version = "1.13.220", depends = ["java"] }
+babashka = { version = "1.13.230", depends = ["java"] }
 
 # releases: https://github.com/bats-core/bats-core/releases
 # changelog: https://github.com/bats-core/bats-core/blob/master/docs/CHANGELOG.md
@@ -29,11 +29,11 @@ bats = "1.14.0"
 
 # releases: https://github.com/CircleCI-Public/circleci-cli/releases
 # Packs and validates the orb - `make orb/validate`.
-circleci-cli = "1.0.49838"
+circleci-cli = "1.18.0"
 
-# versions: https://github.com/adoptium/temurin21-binaries/releases
-# changelog: https://adoptium.net/temurin/release-notes/?version=21 (skip)
-java = "temurin-21.0.12.1+1.0.LTS"
+# versions: https://github.com/adoptium/temurin25-binaries/releases
+# changelog: https://adoptium.net/temurin/release-notes/?version=25 (skip)
+java = "temurin-25.0.5.1+2.0.LTS"
 
 # releases: https://github.com/jdx/mise/releases
 # changelog: https://github.com/jdx/mise/blob/main/CHANGELOG.md
@@ -45,7 +45,7 @@ mise = "2026.11.11"
 # changelog: https://docs.python.org/3/whatsnew/changelog.html
 # The `pipx:` backend builds the tool venv from this interpreter. Without the
 # entry mise falls back to whatever python the machine happens to have.
-python = "3.14.7"
+python = "3.15.2"
 
 # releases: https://github.com/koalaman/shellcheck/releases
 # changelog: https://github.com/koalaman/shellcheck/blob/master/CHANGELOG.md
@@ -59,7 +59,7 @@ shfmt = "3.14.1"
 # releases: https://github.com/astral-sh/uv/releases
 # changelog: https://github.com/astral-sh/uv/blob/main/CHANGELOG.md
 # Installs the tools that come from the `pipx:` backend. yamllint is the only one.
-uv = "0.12.12"
+uv = "0.13.9"
 
 # releases: https://github.com/google/yamlfmt/releases
 yamlfmt = "0.21.0"

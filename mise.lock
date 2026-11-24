@@ -3,44 +3,51 @@
 lockfile_version = 4
 
 [[tools.babashka]]
-version = "1.13.220"
+version = "1.13.230"
 backend = "github:babashka/babashka"
-specifiers = ["1.13.220"]
+specifiers = ["1.13.230"]
 
 [tools.babashka."platforms.linux-arm64"]
-checksum = "sha256:0efd6ef36b93ea2f0ae6ebf9d1bcd1a66167c2f41c17e990659aa067654437e8"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-linux-aarch64-static.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537835582"
+checksum = "sha256:d3935b08e8e2e81d1dd56be0ad72715cf1ebcd01cae6f8a6c909b5e4faa23884"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-linux-aarch64-static.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768850880"
 
 [tools.babashka."platforms.linux-arm64-musl"]
-checksum = "sha256:0efd6ef36b93ea2f0ae6ebf9d1bcd1a66167c2f41c17e990659aa067654437e8"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-linux-aarch64-static.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537835582"
+checksum = "sha256:d3935b08e8e2e81d1dd56be0ad72715cf1ebcd01cae6f8a6c909b5e4faa23884"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-linux-aarch64-static.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768850880"
 
 [tools.babashka."platforms.linux-x64"]
-checksum = "sha256:5211ebf6267be2dbbf4857611cb01331b865bf6b0a8c9bc500c83a816df1a769"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537834262"
+checksum = "sha256:590a131ec3456c2313ebcb5ae2ee6836ca1f01f481da08320cd8c8f46d3644f9"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768848362"
 
 [tools.babashka."platforms.linux-x64-musl"]
-checksum = "sha256:5211ebf6267be2dbbf4857611cb01331b865bf6b0a8c9bc500c83a816df1a769"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537834262"
+checksum = "sha256:590a131ec3456c2313ebcb5ae2ee6836ca1f01f481da08320cd8c8f46d3644f9"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768848362"
 
 [tools.babashka."platforms.macos-arm64"]
-checksum = "sha256:f7d18c3ab11bb4ad0e32a45c1ae40ae25911d5fa06ba4ded07cb90b8af158077"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-macos-aarch64.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537834527"
+checksum = "sha256:3adcd97eeb3ebe324cf3a0be6d969a5626a14783596d3cad911b2f4b95809cea"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-macos-aarch64.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768852416"
 
 [tools.babashka."platforms.macos-x64"]
-checksum = "sha256:ebbfdf159e8d5ee8b7015b15c6558b2039fe76478de893cf317c8c50805340de"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-macos-amd64.tar.gz"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537840624"
+checksum = "sha256:b4b6b4e78f90a507fb660e0ed2d3e65bdab68ba20ad0151330f48fa32c4c1f49"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-macos-amd64.tar.gz"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768853847"
 
 [tools.babashka."platforms.windows-x64"]
-checksum = "sha256:baf87302db04377d44f10dd1cb5c29924fc418d5765dc149213e793be5de0e9e"
-url = "https://github.com/babashka/babashka/releases/download/v1.13.220/babashka-1.13.220-windows-amd64.zip"
-url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/537834470"
+checksum = "sha256:e49f1992a3d4e73e46f2245707decb02163ce07a84b48f64bbd3c5a9ba6b5fb8"
+checksum_source = "mise-versions"
+url = "https://github.com/babashka/babashka/releases/download/v1.13.230/babashka-1.13.230-windows-amd64.zip"
+url_api = "https://api.github.com/repos/babashka/babashka/releases/assets/768859726"
 
 [[tools.bats]]
 version = "1.14.0"
@@ -78,77 +85,84 @@ url = "https://github.com/bats-core/bats-core/archive/refs/tags/v1.14.0.tar.gz"
 url_api = "https://api.github.com/repos/bats-core/bats-core/tarball/v1.14.0"
 
 [[tools.circleci-cli]]
-version = "1.0.49838"
+version = "1.18.0"
 backend = "aqua:CircleCI-Public/circleci-cli"
-specifiers = ["1.0.49838"]
+specifiers = ["1.18.0"]
 
 [tools.circleci-cli."platforms.linux-arm64"]
-checksum = "sha256:12abfbdade3df284de615766d4b35c81c03a36f2b28738820799dcd9377f58bc"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004994"
+checksum = "sha256:9c106db4afe51e4d77bd3fdfc29c5d22f500b31c88a2b02009f7c3486313b84e"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315535"
 
 [tools.circleci-cli."platforms.linux-arm64-musl"]
-checksum = "sha256:12abfbdade3df284de615766d4b35c81c03a36f2b28738820799dcd9377f58bc"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_linux_arm64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004994"
+checksum = "sha256:9c106db4afe51e4d77bd3fdfc29c5d22f500b31c88a2b02009f7c3486313b84e"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_linux_arm64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315535"
 
 [tools.circleci-cli."platforms.linux-x64"]
-checksum = "sha256:51bb856474ef5459a11b7323fe12cef89c34aa5cecfb43602399b5169f19ebf1"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_linux_amd64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004967"
+checksum = "sha256:74880b19c86bc8d7eea23dcc0816cc2d7e318f33173724db0060f988ad967c8e"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_linux_amd64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315534"
 
 [tools.circleci-cli."platforms.linux-x64-musl"]
-checksum = "sha256:51bb856474ef5459a11b7323fe12cef89c34aa5cecfb43602399b5169f19ebf1"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_linux_amd64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004967"
+checksum = "sha256:74880b19c86bc8d7eea23dcc0816cc2d7e318f33173724db0060f988ad967c8e"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_linux_amd64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315534"
 
 [tools.circleci-cli."platforms.macos-arm64"]
-checksum = "sha256:de3391c84bc580a010ea750401cea2cb4a6598a0efb52af917ba7722fdd3c864"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_darwin_arm64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004993"
+checksum = "sha256:b09cfca70a03e5d662af37c0b779f6c759a9d7852069d89394943353236b4bbc"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_darwin_arm64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315626"
 
 [tools.circleci-cli."platforms.macos-x64"]
-checksum = "sha256:7a1eb8db3339fbd7442db8da1a37b85e8da6c70148574f1dc841108fe5bcdf49"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_darwin_amd64.tar.gz"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004964"
+checksum = "sha256:1e62edc79c7e331ea6f85ac1c7a2171e35be976ab9520377844dacf03695071c"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_darwin_amd64.tar.gz"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315536"
 
 [tools.circleci-cli."platforms.windows-x64"]
-checksum = "sha256:ebcf0287f455a16c08aef9c246e40522cc5af26bba5e04e7f91862d4e948c7b2"
-url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.0.49838/circleci-cli_1.0.49838_windows_amd64.zip"
-url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/553004972"
+checksum = "sha256:3219423ff08712e5b00c9ba3f91bd5dd3c5582793d90ea955446f70797eeca67"
+checksum_source = "mise-versions"
+url = "https://github.com/CircleCI-Public/circleci-cli/releases/download/v1.18.0/circleci-cli_1.18.0_windows_amd64.zip"
+url_api = "https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/assets/769315538"
 
 [[tools.java]]
-version = "temurin-21.0.12.1+1.0.LTS"
+version = "temurin-25.0.5.1+2.0.LTS"
 backend = "core:java"
-specifiers = ["temurin-21.0.12.1+1.0.LTS"]
+specifiers = ["temurin-25.0.5.1+2.0.LTS"]
 
 [tools.java."platforms.linux-arm64"]
-checksum = "sha256:23e37e026f12f3e706f18938ff611db3032d075b09d0879a25d06718c773e223"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:c37879e0d08eeb1baa69fcbb7758cd455b7b1c0ceab1e2a136ccb1713c530984"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.linux-arm64-musl"]
-checksum = "sha256:8242627927adc90ac2561d0812dd39890ebc21ef09b550bc2e8b93640b8af4f8"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_aarch64_alpine-linux_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:0501ef55ea9ec19b14987def7a73e044cd1748f7f3b97237b49007d387a84a1a"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_alpine-linux_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.linux-x64"]
-checksum = "sha256:ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:760f91b22c3efc9bd1b64ff950598231be82928cc807e30691a0e7a2995a62c0"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_linux_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.linux-x64-musl"]
-checksum = "sha256:bd8824214e42b33333c7f55a039ea078ad6ea6be20d7c5b011c801fb2bdb44f0"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_alpine-linux_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:dbd75c6332ad995d20b6e25624b84652ef332d6babee4e9ddac3f36ee38d57be"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_alpine-linux_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.macos-arm64"]
-checksum = "sha256:3623232f33a9c3baadf304480b2535f9a3cba8a58d42ecbb438ba267315d9998"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:248353ea41be39d5d2c1c67c7ce0ae4d1668966aacd0c5308464bc1be42f677b"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.macos-x64"]
-checksum = "sha256:44db0f08196daf19a47f90d13388b0c943b67663cb537f998fe29e836fa842ce"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_mac_hotspot_21.0.12.1_1.tar.gz"
+checksum = "sha256:b4b96fb7b9babd1b4faab1238e1835d0d7dd77b0690d220643c749a9ac00db36"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_mac_hotspot_25.0.5.1_2.tar.gz"
 
 [tools.java."platforms.windows-x64"]
-checksum = "sha256:f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e"
-url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip"
+checksum = "sha256:849d380ab0a64d9098e7d3a2de28beb73841c3b255c8284f019ccd8748c5eb5b"
+url = "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_windows_hotspot_25.0.5.1_2.zip"
 
 [[tools.mise]]
 version = "2026.11.11"
@@ -198,43 +212,43 @@ url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273736"
 provenance = "minisign"
 
 [[tools.python]]
-version = "3.14.7"
+version = "3.15.2"
 backend = "core:python"
-specifiers = ["3.14.7"]
+specifiers = ["3.15.2"]
 
 [tools.python."platforms.linux-arm64"]
-checksum = "sha256:8a0798baa8a2c27b5751d590aced543eaa85e20b3f73d93c1af049688acdc9c5"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"
+checksum = "sha256:89bb07630c7056f5fee066e5fffc7c9a8141f6f2a5a4402eb1c72b3358e26809"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-arm64-musl"]
-checksum = "sha256:701c31d72187242302922a29f3bc6023ceb68b6b68fb8d4ed7568d1e6ef34548"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-aarch64-unknown-linux-musl-install_only_stripped.tar.gz"
+checksum = "sha256:86c09b8c78dbef41ef306239809c53ffde8565d7a492b49efa8c29194f12908c"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-aarch64-unknown-linux-musl-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-x64"]
-checksum = "sha256:3959f92825141e04adf44982d3a83ee57af0877e893b0796e04c1468749d9b04"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"
+checksum = "blake3:8ae1f7551054babd6705cdaedf63441980eaa3ba3e33586760f6cc7dc19df490"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.linux-x64-musl"]
-checksum = "sha256:c773f8a7357c0d1a29e208a14bc16386731ca9c0d2e51f1b6741967fb0632cdc"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-x86_64-unknown-linux-musl-install_only_stripped.tar.gz"
+checksum = "sha256:4209323c6bd2d174fd5db97f8a6474896c4f17ff663d6ebfccbf8a0353dbcd88"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-x86_64-unknown-linux-musl-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.macos-arm64"]
-checksum = "sha256:4632cb1a6edad9e73d3c81b6d2e69131637d995173e3e85005df14102b0592ba"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-aarch64-apple-darwin-install_only_stripped.tar.gz"
+checksum = "sha256:1ca8e6395dfd98cfb83c2193b5a33637a9b48304b98d4df4f2711e3f144806d1"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-aarch64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.macos-x64"]
-checksum = "sha256:7e151a7c9028855b61a7d6e78381f2020a1ef185281399f3b1aafc5e1c9a1a64"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-x86_64-apple-darwin-install_only_stripped.tar.gz"
+checksum = "sha256:cc6648bc7c4a993fd9ee8d384decde0081e66f574a98dd26931d9812a86a778e"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-x86_64-apple-darwin-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [tools.python."platforms.windows-x64"]
-checksum = "sha256:ca3c33ca924dfcab3b74205a7a58a88b0255135c53f95497b26b5e60700fd66d"
-url = "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.14.7+20260901-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"
+checksum = "sha256:84b3be14a44c25426e8487f4b6d25f68be8a6ff9eeae46037a7da10439c1ed08"
+url = "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.15.2+20261123-x86_64-pc-windows-msvc-install_only_stripped.tar.gz"
 provenance = "github-attestations"
 
 [[tools.shellcheck]]
@@ -318,50 +332,50 @@ url = "https://github.com/mvdan/sh/releases/download/v3.14.1/shfmt_v3.14.1_windo
 url_api = "https://api.github.com/repos/mvdan/sh/releases/assets/547320827"
 
 [[tools.uv]]
-version = "0.12.12"
+version = "0.13.9"
 backend = "aqua:astral-sh/uv"
-specifiers = ["0.12.12"]
+specifiers = ["0.13.9"]
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:fe08db50cc1b56cd1da7801065ed1103d27ed3f9571cd122386cfc7faf1b8df5"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169214"
+checksum = "sha256:0797542018e541a9288855df555c8077eed06f7a47d206362030480e8ecc9f3d"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513657"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:82e59fff633cbd96fb675f37c7a748c056d909a59ecf476f8ff0e5bee76b9b23"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169225"
+checksum = "sha256:37fbb7c5bc66cf99c12aa881949d216181e201dec449772c4329e56487d61179"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513671"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:ab9b309d4586403f024e100abaceb396616e178a553e2500c36087d180f09509"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169491"
+checksum = "sha256:a7fbaff2b9a271d85c1bdb540941090fd1ce011797b4abeb48e4dcd39c2471d5"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513954"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:0b0bbd7144f91d9b694e29c920fca3a060322bd134e8507e5eb92049a3e2edf0"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169515"
+checksum = "sha256:58ccf5f1792b8a5a88d01bc910ea131a8b3db4a319a17ad5fad75e0845a3e271"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513984"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:46740540b63fdee9a6cb2e19baf3f1f475b850c440a33e63455087a6871263f1"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169165"
+checksum = "sha256:5aeca67f2283f75235de40d0bd9c0a5bbc5fce23b6d48b3bf9fa1b2db08382ca"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513631"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:0dc8cd6c961582b0d140b5398f96b23502885277fb3464241456a2435e460dfa"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169443"
+checksum = "sha256:617a3211261b0fc739562f0071aa34e9739797c510208ede8e2977c30903d041"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513912"
 provenance = "github-attestations"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:3d54912924c36e862c14f427d04f2ed70a99e8001d1c30caa101f6d5711626d5"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.12/uv-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/553169472"
+checksum = "sha256:edd61f7f5728a56cc62455386661860bdfc7bab65872f39b0c25bdcc1d8e1beb"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.9/uv-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/758513940"
 provenance = "github-attestations"
 
 [[tools.yamlfmt]]
