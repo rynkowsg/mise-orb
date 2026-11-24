@@ -150,6 +150,53 @@ url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0
 checksum = "sha256:f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e"
 url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip"
 
+[[tools.mise]]
+version = "2026.11.11"
+backend = "aqua:jdx/mise"
+specifiers = ["2026.11.11"]
+
+[tools.mise."platforms.linux-arm64"]
+checksum = "sha256:06231a655ae71c6641230f563ab45c344fbea56a19ff5e8377603f536df6088e"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-linux-arm64-musl.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772272451"
+provenance = "minisign"
+
+[tools.mise."platforms.linux-arm64-musl"]
+checksum = "sha256:06231a655ae71c6641230f563ab45c344fbea56a19ff5e8377603f536df6088e"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-linux-arm64-musl.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772272451"
+provenance = "minisign"
+
+[tools.mise."platforms.linux-x64"]
+checksum = "sha256:4760a05d70f8fcc2176f935705060c709bafde86e98b01a836ccd68129ccbc3d"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-linux-x64-musl.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273216"
+provenance = "minisign"
+
+[tools.mise."platforms.linux-x64-musl"]
+checksum = "sha256:4760a05d70f8fcc2176f935705060c709bafde86e98b01a836ccd68129ccbc3d"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-linux-x64-musl.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273216"
+provenance = "minisign"
+
+[tools.mise."platforms.macos-arm64"]
+checksum = "sha256:3a0b7a727d86bd15a64c6df9ef6531111a4741b07e6f1e2bb6f6bb5b09e2663f"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-macos-arm64.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273513"
+provenance = "minisign"
+
+[tools.mise."platforms.macos-x64"]
+checksum = "sha256:7784da9fd85c77a0f0df6e6e39a6908089afc2a3f2c7ade78d362147fc4ef222"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-macos-x64.tar.gz"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273606"
+provenance = "minisign"
+
+[tools.mise."platforms.windows-x64"]
+checksum = "sha256:f4fcad8e9ca83ba81b709f2636a860f2b7d8c39af17115944493aab8c4ca6fab"
+url = "https://github.com/jdx/mise/releases/download/v2026.11.11/mise-v2026.11.11-windows-x64.zip"
+url_api = "https://api.github.com/repos/jdx/mise/releases/assets/772273736"
+provenance = "minisign"
+
 [[tools.python]]
 version = "3.14.7"
 backend = "core:python"

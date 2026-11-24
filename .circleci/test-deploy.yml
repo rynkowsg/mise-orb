@@ -10,7 +10,7 @@ orbs:
 constants:
   # changelog: https://github.com/jdx/mise/blob/main/CHANGELOG.md
   # releases: https://github.com/jdx/mise/releases
-  - &mise_shared_opts {mise_version: v2026.9.9,}
+  - &mise_shared_opts {mise_version: v2026.11.11,}
 
 # Every branch and every tag. Tags have to be named: a job with no tag filter is
 # skipped when a tag is pushed, and the publish jobs below require these, so on a
