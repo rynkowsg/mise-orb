@@ -13,13 +13,13 @@ orbs:
   rynkowsg: rynkowsg/rynkowsg@0.7.0
   # orb info: https://circleci.com/developer/orbs/orb/circleci/shellcheck
   # changelog: https://github.com/CircleCI-Public/shellcheck-orb/releases
-  shellcheck: circleci/shellcheck@3.4.0
+  shellcheck: circleci/shellcheck@3.5.1
 
 executors:
   docker_base_small_x86:
     # https://circleci.com/developer/images/image/cimg/base
     # https://hub.docker.com/r/cimg/base/tags
-    docker: [{image: 'cimg/base:2026.09-24.04'}]
+    docker: [{image: 'cimg/base:2026.11-26.04'}]
     resource_class: small
 
 # Every branch and every tag. Tags have to be named: a job with no tag filter is
